@@ -1,0 +1,45 @@
+Strings/ Arr:
+  constant mem with ascii arr
+  will sorting the array help?
+  sliding window i,j (substring etc...)
+
+Linkedlist:
+  two pointers-> mid have two fast and 1 slow
+  k to last -> have two go to k then 1 wait, then keep going till two can no more
+
+Stacks:
+  use second stack (sorting)
+  persistent stack -> node add attribute of prev
+  make stack from linkedlist with keeping track of top
+  make queue from linkedlist with keeping track of first and last
+
+Trees:
+  checking min vs max for binary tree
+  ask if tree is binary, binary search tree, balanced tree? unique val?
+  do they have ref to parent, think of garbage collector in this scenario
+
+Recursion:
+  for memoizing, go back and ask yourself if you really are using all you memoized
+  example: memoizing current and last row for number of path
+
+Sorting:
+  think of binary search when it is sorted
+  finding middle element, think of median select
+  which sorts to use based off memory, n-way merge
+
+
+c = Collections.counter(s)
+i = j = 0
+check = len(t)
+minimum = float('inf')
+while j < len(s):
+  if c[s[j]]:
+    check -= 1
+  c[s[j]] -= 1
+  if not check:
+    while i < j and c[s[i]] < 0:
+      minimum = min(j-i,minimum)
+      c[s[i]] += 1
+      i += 1
+return minimum
+  

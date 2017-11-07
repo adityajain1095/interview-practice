@@ -1,0 +1,164 @@
+String Problems:
+  substring:
+    longest non repeating substring: use sliding window
+    longest palindrome sequence: use expanding center, 0(1) space
+  subsequence:
+    palindrome: use recursion
+  common prefix from lists:
+    sort words if you can
+    first be prefix, then keep going down words
+  needle_haystack:
+    make simpler by checking string[i:len(needle)+i] as needle
+  group anagrams:
+    sort the word as key in dictionary
+  can jump:
+    dont do recursion. just keep track of farthest you can go and iterate thru
+  insert into ranges:
+    keep left and right arr:
+      left has ones that intersect, insert.start > interval.end
+      right has ones that intersect, interval.start > insert.end
+  word_ladder:
+    bfs, get neighbors func with ascii_lowercase
+  partition_palindrome:
+    use dp 2d array
+  word_break:
+    while string not empty: check against word_dictionary
+
+Trees:
+  isSameTree:
+    recursive, check each root if the have match, if empty true,
+    then check left and right and return left and right
+  is Symmetric:
+    recursive, check left and right, but switch
+  levelOrder:
+    keep nodes and depth array, bfs search
+  buildTree (inorder, preorder):
+    preorder to check inorder, get index from inorder list
+  sortedArrayToBST:
+    binary search basically, basecase checks, get mid, left is low/mid-1, high is mid+1/high
+  maxDepth:
+    recursion simple
+  isBalanced:
+    using -1 for false overidding, left right check for -1 and abs(left-right) too
+  preorder:
+    use stack, while len(s) != 0, append(node), s.put(children)
+  postorder:
+    use 2 stacks, while len(s1): pop and put into s2, then put children in s1
+    then while len(s2), pop and put in output
+  inorder:
+    while len(s) != 0 and current (start with root = current):
+      go to left whle curret, pop from s, put in output, then set current -> current.right
+
+Arrays:
+  before attempting:
+    can i manipulate list?
+    should i sort the list?
+    should i be using a list?
+    sliding window?
+    hashmap, complement
+  max area for water tub:
+    sliding window problem, but i = 0, j = n-1
+  three+ sum:
+    sort the list
+  two sum:
+    use dictionary mapping
+  max stack:
+    keep list of maximum at each time
+  rotated_search:
+    binary search: while low<high, low = mid-1, high=mid+1
+    check the direction of high and low, if it in right order
+    then look for target in between then go correct direction or go opp
+  search range:
+    double binary search
+    or one together, and do
+      a[low] == target == a[high] return [low,high]
+  rotate_image:
+    reverse images rows
+    from there, while i < matrix size and next loop j = i + 1 and less than matrix[i]. size
+      swap matrix[i][j] and matrix[j][i]
+  2d_matrix:
+    same concept, for last two, check that row != row_i and col != col_i, b/c they merge at that point and repeating vals
+  merge_enough_space:
+    standard_merge with some value changing
+  longest_consecutive_sequence:
+    convert to set for list,
+    check -1 not in counts then while +1 in counts, get maximum
+  surrounded_x:
+    find O that are on the edge and convert to diff value, find all 0 to x, diff value back to 0
+  find mid from rotated sorted arr:
+    binary search, if nums[low] < nums[high]: return low, then mid to check which way to go
+
+  Linked Lists:
+    removeNthFromEnd:
+      fast and slow pointer, set slow.next to slow.next.next in second loop
+    mergeTwoLists:
+      solve recursively:
+      this merges the linkedlists, instead of making copies
+        if none in either, return the other or None
+        if l1.val < l2.val:
+          l1.next recurse(l1.next,l2)
+          return l1
+        vice versa
+    swap pairs in linkedlist:
+      first, second = head, head.next
+      keep swapping values
+    rotateRight:
+      connect tail with head. keep track of length
+      then go length - k. start head here and break chain
+    partition:
+      create dummy node linked to head
+      then return dummy.next
+    reverse_between m and n:
+      dummy trick. go up to m. reverse from m to n+1, put dummy behind, current at next and prev, then match
+    reorderList:
+      split list from head:
+        dummy, slow, fast, (dummy = slow, technically prev, as slow = slow.next) end, dummy.next = None, return head slow
+      merge using recursion and indexing mod
+    intersection_of_linked_lists:
+      keep going thru heads, then when null set head1 to head2, only return when equal
+        second is either hit or miss/ b/c same distance travelled
+
+  recursion:
+    mergeTwoLists:
+      solve recursively:
+      this merges the linkedlists, instead of making copies
+        if none in either, return the other or None
+        if l1.val < l2.val:
+          l1.next recurse(l1.next,l2)
+          return l1
+        vice versa
+    generateParenthesis:
+      recursively, with l = 0, r = 0 start, check for l < n, r < l and basecase of l+r = n*2
+    climbStairs:
+      recurision fix like fibonacci, 3 variables keep track of
+
+  Number Manipulation:
+    reverse int:
+      account for sign,overflow
+      use math*base 10 and mode 10 base, o(1) space
+    next permutation:
+      start from end:
+      find first element that isn't in ascending order
+      from there, find the number that is just larger than
+      the element you found
+      swap elements
+      then reverse the elements to that right of the first
+      element you found
+      if first scan doesn't give index, then return reverse number
+
+  dynamic_programming:
+    number of paths optimized:
+      use current and lastrow instead of whole matrix for space
+    apple_stocks:
+      figure out what you need to remember, keep track of best profit, min price
+    product_of_all_other_numbers:
+      output = [1]*len(arr)
+      go back and forward, keeping track of prev_product *= arr[i], and have output[i] *= prev_product
+      do forward then reversed
+    highest_of_three:
+      think of what you need to store
+      highest of three = 3 high numbers, 2 low numbers (negative) * highest number(positive)
+      store two highest numbers, two lowest numbers and check current against them and update max
+    max_buy_once_sell_once:
+      keep track of cheapest_buy at each index, then get maximum
+    max_product, keep min_val, max_val, min = arr[i], arr[i]*min, arr[i]*max, same for max

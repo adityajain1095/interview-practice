@@ -1,0 +1,18 @@
+nosql vs sql:
+
+nosql:
+  Advantages
+    -provide a higher level of flexibility with newer data models
+    -Non-Relational means table-less
+
+    -Easier scalability through support for Map Reduce
+
+    -No need to develop a detailed database model
+
+Disadvantages
+  -querying data is not as fast as sql since there is no model
+  querying through b tree is faster than key value
+  -no join in nosql
+
+sql is vertical scaling, need to improve hardware to improve load batching
+sql needs normalization so no redundancy

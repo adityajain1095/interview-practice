@@ -1,0 +1,124 @@
+Cache memory is a very high speed memory that is placed between the CPU and main memory, to operate at the speed of the CPU.
+
+When the processor needs to read or write a location in main memory, it first checks for a corresponding entry in the cache.
+
+steps for big data questions:
+Step 1: Make Believe
+  make it so that it can work fast without worrying about memory issues
+Step 2: Get Real
+  back to the original problem
+  how much data can fit into one machine, how would it work across multiple computers
+Step 3: Solve Problem
+  from issues in Step 2, solve the original problem and fix your Step 1
+
+how to split across multiple machines
+
+by order appearance:
+  when machine is full, move on to next machine, might be hard for querying data since no
+  hash key for finding it
+
+by hashing:
+  get hash key for data, then hash key % num of machines to determine which machine it goes
+  to. once machine is over, copying/redistributing very expensive, amoritize o(1)
+  if machine is full, spill over to other machine, or have two machines like tree structure
+
+by actual value:
+  store on a machine for specific type of data. ex: social media, store mexican people in 'Mexico'
+  machine
+
+EXAMPLE 1a:
+  Given a list of millions of documents, how would you find all documents that
+  contain a list of words? The words do not need to appear in any particular order,
+  but they must be complete words. That is, "book" does not match "bookkeeper."
+
+  STEP 1:
+  have all the words in the list, have at least 1?
+  inputs:
+    1 file, list of words
+  output:
+    list of files with wor
+  convert list of words to set for better lookup
+  output_set = set()
+  parse through file
+    if word in list of words:
+      output_set.add(word)
+  if len(output_set) == len(list of words):
+    return True
+  return False
+
+  STEP 2:
+    can't store all the the files on one machine, is that really an issue?
+    i think step 1 works well across multiple machines b/c you don't need to have one
+    file talk to another
+    can split up arbitrarily
+    how big is list of words?
+
+  STEP 3:
+    split up data across multiple machines arbitrarily from list of millions of documents,
+    divided up equally, each machine has list of words
+    actually use hash instead,
+    if they want to check for specific file, they hash into machine,
+    then there is dic of fileNames = True if have list
+    save little space for names of files that have them.
+    same algo as STEP 1
+
+EXAMPLE 1b:
+  Given a list of millions of documents, how would you find all documents that
+  contain a list of words? The words do not need to appear in any particular order,
+  but they must be complete words. That is, "book" does not match "bookkeeper."
+
+  STEP 1:
+    create map of list words with docs, one map for all the docs
+
+  STEP 2:
+    think of use case, divide by words for machine
+
+  STEP 3:
+    across machines, same idea, just hash, but have distributed hash map
+
+    10.1:
+    Imagine you are building some sort of service that will be called by up to
+    1000 client applications to get simple end-of-day stock price information
+    (open, close, high, low). You may assume that you already have the data,
+    and you can store it in any format you wish. How would you design the
+    client-facing service which provides the information to client applications?
+    You are responsible for the development, rollout, and ongoing monitoring
+    and maintenance of the feed. Describe the different methods you
+    considered and why you would recommend your approach. Your service
+    can use any technologies you wish, and can distribute the information to
+    the client applications in any mechanism you choose.
+
+    Step 1:
+    all on one machine, no problem. client makes connection with server, just one DB,
+    done
+
+    Step 2:
+    distributed DB, how to do queries on that?
+
+    Step 3:
+    sql or nosql, mongodb or mysql
+
+
+    //
+    be more specific on Oracle, nvme, big data application
+    give impact enable something else
+
+    where u want to grow
+
+    10.2
+
+    How would you design the data structures for a very large social network (Facebook,
+    LinkedIn, etc)? Describe how you would design an algorithm to show the connection,
+    or path, between two people (e.g., Me -> Bob -> Susan -> Jason -> You).
+
+    Step 1:
+    	graph, dfs to find person, done
+
+    Step 2:
+    	distributed graph?, is this scalable when adding input
+
+    Step 3:
+    	distributed DB,
+    	perform dfs on db with friends table, queries way better than nosql
+
+  

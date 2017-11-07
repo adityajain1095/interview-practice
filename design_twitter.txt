@@ -1,0 +1,59 @@
+core features:
+  - sending a tweet
+  - timeline
+    - user timeline (your own tweets)
+    - home timeline (see tweets from people you follow)
+  - following
+    
+  naive solution:
+    relational database: 
+      tweets: id, content, user
+      user: id, name
+      
+  characteristics:
+    what to optimize:
+      need to optimize reading, not writing
+      care more about availability vs consistency
+  
+  optimized solution:
+    -tweeting steps:
+      user hits send button (user a 100 followers)
+        -api lands on load balancer which distributes to a machine
+        -lands in redis machines(in memory ram not disks) constantly updated, can have timer on activity for optimization,
+        longer on load when log back in
+      x 300 b/c 300 followers
+      in redis machine:
+        user b: tweet id, sender id, content
+    
+    performance issue with users with huge followers
+    
+    to fix issue:
+      use in memory and relational approach mix
+      instead have famous users have their tweets merged at run time during load balancer, separate from in memory
+      
+    for followers:
+      in example, have followers for alice as table in memory in redis -> followers list gives us id of lists which we have to 
+      recompute 
+      
+    tradeoff:
+      time vs space
+      fast read and performance vs large memory, 
+      
+    user b accessing his timeline
+      - user b hits browser
+      - user b hits load balancer
+      - gets machine with capability, hit redis cluster (only 1 has to answer, the fastest)
+      - fastest populates his timeline
+      
+    more computation when tweeting, not so much when accessing timeline
+    
+    in this example 3 redis machine with info for a user. in total can have 100,000 redis machines.
+    use hashmap for determing which redis machine for a user and do it based off their id, hash look up in redis machine within
+    load balancer step
+    
+    follow up topics:
+      search
+      push notifications
+      how to incorporate ads
+      
+  

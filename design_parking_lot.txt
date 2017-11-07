@@ -1,0 +1,36 @@
+design a parking lot:
+  how to create system to manage parking lot
+  
+handling ambiguity:
+  recognize breadth of problem
+  system design, class hierarchy, or specific prompt
+  
+how many spots?, how many buildings?, how many levels, multiple entrances?, optimize order to fill in spots?, 
+different vehicles for spot?, premium spots?
+
+let's assume, 4 different parking spot sizes (s, m, l, xl), small can fit in biger slot
+
+come up with class hierarchy: parking lot, vehicles, parking spots
+  abstract vehicle:
+    license plate(id)
+    color
+  s , m, l, xl car inherit from vehicle
+  
+  parking lot class:
+    place_vehicle(vehicle):
+      return parking spot
+  
+  parking spot:
+    parking spot id
+    bool empty
+    enum size
+    
+  put in vehicle and store it in memory:
+    ex for large cars:
+      stacks with open spots for large and then xlarge, O(1) constant
+      put in hashmap
+  remove vehicle:
+    hash map for vehicle id and its parking spot, O(1) constant:
+    remove from map, put parking spot in stack
+    
+  concurrency for parking spots

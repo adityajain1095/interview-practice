@@ -1,0 +1,31 @@
+how to design wechat or whatsapp
+
+questions to ask b4:
+  features first: 
+    mobile, 1 to 1, only text
+    send, deliver, read confirmation
+    push notifications
+    history or no history
+    
+  
+  ex:
+    bob        n servers (asynchronous)            alice
+    scale horizontally: add n machines, not better compute power
+    
+  server:
+        multiple queues in server: store messages
+      
+  right order in 
+  
+  dive deep:
+    group messages
+    scaling more
+      client side back up?
+    cache
+  load balancing:
+    which server will serve the customer
+    layers of caching as well
+    
+
+how to design messenger app?
+  
